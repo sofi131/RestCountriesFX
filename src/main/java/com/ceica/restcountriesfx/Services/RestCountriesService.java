@@ -2,6 +2,7 @@ package com.ceica.restcountriesfx.Services;
 import com.google.gson.Gson;
 import com.ceica.restcountriesfx.Models.CountryDAO;
 import com.ceica.restcountriesfx.Models.CountryDTO;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,26 +10,47 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestCountriesService implements IRestCountries {
     @Override
     public String[] getRegions() {
-        String url="https://restcountries.com/v3.1/all";
+        List<String> regions = new ArrayList<>();
+        String url = "https://restcountries.com/v3.1/all";
+        List<CountryDTO> countryDTOList=new ArrayList<>();
         try {
-            String datos=getDataUrl(url);
+            String datos = getDataUrl(url);
             Gson gson = new Gson();
             //String a obj json
-            CountryDAO[] objects=gson.fromJson(datos,CountryDAO[].class);
-           // System.out.println("");
-        }catch (IOException e){
+            CountryDAO[] objects = gson.fromJson(datos, CountryDAO[].class);
+
+            // System.out.println("");
+            for (CountryDAO countryDAO : objects) {
+                countryDTOList.add(CountryDTO.from(countryDAO));
+            }
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new String[0];
+        String[] regionArray= new String[regions.size()];
+        for (int i = 0; i < regions.size(); i++) {
+            regionArray[i]= regions.get(i);
+        }
+        // return (String[]) regions.toArray();
+        return regionArray;
     }
 
     @Override
     public List<CountryDTO> getCountriesByRegion(String region) {
+        String url="https://restcountries.com/v3.1/region"+region;
+        try {
+            String datos=getDataUrl(url);
+            Gson gson = new Gson();
+            //String a obj json
+            List<CountryDAO> objects = gson.fromJson(datos,new TypeToken<List<CountryDAO>>(){}.getType());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
