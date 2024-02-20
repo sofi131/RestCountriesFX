@@ -55,6 +55,7 @@ public class RestCountriesController {
 
         });
         countryNameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
+
     }
 
     @FXML
