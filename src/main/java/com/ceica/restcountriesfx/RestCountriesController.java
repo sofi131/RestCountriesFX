@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 
@@ -47,11 +48,18 @@ public class RestCountriesController {
                 tblCountries.setItems(observableList);
             }
         });
+        //para que clique en la tabla y salgan cosas.
         tblCountries.setOnMouseClicked(e->{
             //nombre del país que se ha clicado
             String countryName=tblCountries.getSelectionModel().getSelectedItem().getName();
             //objeto country con toda la información (bandera y demás)
             CountryDTO countryDTO=fakeRestCountriesService.getCountryByName(countryName);
+            txtCountryName.setText(countryDTO.getName());
+            txtCountryCapital.setText(countryDTO.getCapital());
+            txtCountryCoin.setText(countryDTO.getCoin());
+            txtCountryPopulation.setText(String.valueOf(countryDTO.getPopulation()));
+            Image image=new Image(countryDTO.getFlag());
+            imgFlag.setImage(image);
 
         });
         countryNameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
@@ -63,6 +71,12 @@ public class RestCountriesController {
         observableList.clear();
         tblCountries.refresh();
         comboRegion.getSelectionModel().clearSelection();
+        // Limpiar los TextField correspondientes
+        txtCountryName.setText("");
+        txtCountryCapital.setText("");
+        txtCountryCoin.setText("");
+        txtCountryPopulation.setText("");
+        imgFlag.setImage(null);
     }
 }
 
