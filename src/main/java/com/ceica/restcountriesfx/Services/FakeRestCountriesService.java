@@ -5,7 +5,7 @@ import com.ceica.restcountriesfx.Models.CountryDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakeCountriesService implements IRestCountries {
+public class FakeRestCountriesService implements IRestCountries {
 
     @Override
     public String[] getRegions() {
@@ -16,13 +16,13 @@ public class FakeCountriesService implements IRestCountries {
     @Override
     public List<CountryDTO> getCountriesByRegion(String region) {
         List<CountryDTO> countryDTOList=new ArrayList<>();
-        //creamos objetos y cada uno tiene que ser diferente
         CountryDTO countryDTO=new CountryDTO();
         countryDTO.setName("Spain");
+        countryDTOList.add(countryDTO);
         CountryDTO countryDTO1=new CountryDTO();
-        countryDTO.setName("France");
+        countryDTO1.setName("France");
         countryDTOList.add(countryDTO1);
-        return null;
+        return countryDTOList;
     }
 
     @Override

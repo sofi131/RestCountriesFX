@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,11 +8,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ceica.restcountriesfx.RestCountriesController">
    <children>
       <ComboBox fx:id="comboRegion" layoutX="28.0" layoutY="29.0" prefWidth="150.0" promptText="Regions" />
-      <TableView fx:id="tableCountry" layoutX="27.0" layoutY="99.0" prefHeight="296.0" prefWidth="193.0">
+      <TableView fx:id="tblCountries" layoutX="27.0" layoutY="99.0" prefHeight="296.0" prefWidth="193.0">
         <columns>
           <TableColumn fx:id="countryNameColumn" prefWidth="195.0" text="Country" />
         </columns>
@@ -21,5 +21,6 @@
       <TextField fx:id="txtCountryPopulation" layoutX="276.0" layoutY="349.0" />
       <TextField fx:id="txtCountryCapital" layoutX="438.0" layoutY="310.0" />
       <TextField fx:id="txtCountryCoin" layoutX="438.0" layoutY="349.0" />
+      <Button layoutX="427.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnClear" prefHeight="25.0" prefWidth="143.0" text="Clear" />
    </children>
 </AnchorPane>
