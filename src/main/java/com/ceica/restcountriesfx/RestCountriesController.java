@@ -3,6 +3,7 @@ package com.ceica.restcountriesfx;
 import com.ceica.restcountriesfx.Models.CountryDTO;
 import com.ceica.restcountriesfx.Services.FakeRestCountriesService;
 import com.ceica.restcountriesfx.Services.FakeRestCountriesService;
+import com.ceica.restcountriesfx.Services.RestCountriesService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -37,7 +38,8 @@ public class RestCountriesController {
     //método inicializar
     @FXML
     public void initialize() {
-        FakeRestCountriesService fakeRestCountriesService = new FakeRestCountriesService();
+        RestCountriesService fakeRestCountriesService = new RestCountriesService();
+
         comboRegion.getItems().addAll(fakeRestCountriesService.getRegions());
         //para que clique la region correspondiente
         comboRegion.setOnAction(e -> {

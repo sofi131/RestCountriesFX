@@ -1,5 +1,6 @@
 package com.ceica.restcountriesfx.Services;
-
+import com.google.gson.Gson;
+import com.ceica.restcountriesfx.Models.CountryDAO;
 import com.ceica.restcountriesfx.Models.CountryDTO;
 
 import java.io.BufferedReader;
@@ -14,7 +15,15 @@ public class RestCountriesService implements IRestCountries {
     @Override
     public String[] getRegions() {
         String url="https://restcountries.com/v3.1/all";
-
+        try {
+            String datos=getDataUrl(url);
+            Gson gson = new Gson();
+            //String a obj json
+            CountryDAO[] objects=gson.fromJson(datos,CountryDAO[].class);
+           // System.out.println("");
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
         return new String[0];
     }
 
