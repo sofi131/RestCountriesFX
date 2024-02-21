@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RestCountriesService implements IRestCountries {
@@ -22,9 +23,7 @@ public class RestCountriesService implements IRestCountries {
         try {
             String datos=getDataUrl(url);
             Gson gson=new Gson();
-            //String a obj json
             CountryDAO[] objects= gson.fromJson(datos,CountryDAO[].class);
-            // System.out.println("");
             for (CountryDAO countryDAO:objects){
                 if(! regions.contains(countryDAO.region)){
                     regions.add(countryDAO.region);
@@ -37,10 +36,9 @@ public class RestCountriesService implements IRestCountries {
         for (int i = 0; i < regions.size(); i++) {
             regionArray[i]=regions.get(i);
         }
-        // return (String[]) regions.toArray();
         return regionArray;
     }
-//Lista de los países
+    //Lista de los países
     @Override
     public List<CountryDTO> getCountriesByRegion(String region) {
         String url="https://restcountries.com/v3.1/region/"+region;
@@ -48,7 +46,6 @@ public class RestCountriesService implements IRestCountries {
         try {
             String datos=getDataUrl(url);
             Gson gson=new Gson();
-            //String a obj json
             List<CountryDAO> objects= gson.fromJson(datos,new TypeToken<List<CountryDAO>>(){}.getType());
 
             for (CountryDAO countryDAO:objects){
@@ -60,23 +57,40 @@ public class RestCountriesService implements IRestCountries {
         }
         return countryDTOList;
     }
-//para conseguir los datos del país
-@Override
-public CountryDTO getCountryByName(String name) {
-    String nameFormatted = name.split(" ")[0];
-    String url = "https://restcountries.com/v3.1/name/" + nameFormatted;
-    CountryDTO countryDTO = null;
-    try {
-        String datos = getDataUrl(url);
-        Gson gson = new Gson();
-        CountryDAO[] countryDAO = gson.fromJson(datos, CountryDAO[].class);
-        countryDTO = CountryDTO.from(countryDAO[0]);
-    } catch (IOException e) {
-        throw new RuntimeException(e);
+    //para conseguir los datos del país
+    @Override
+    public CountryDTO getCountryByName(String name) {
+        String nameFormatted=name.split(" ")[0];
+        String url="https://restcountries.com/v3.1/name/"+nameFormatted;
+        CountryDTO countryDTO=null;
+        try {
+            String datos=getDataUrl(url);
+            Gson gson=new Gson();
+            CountryDAO[] countryDAO=gson.fromJson(datos,CountryDAO[].class);
+            countryDTO=CountryDTO.from(countryDAO[0]);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return countryDTO;
     }
 
-    return countryDTO;
-}
+    @Override
+    public CountryDTO getCountryByCca3(String cca3) {
+
+        String url="https://restcountries.com/v3.1/alpha/"+cca3;
+        CountryDTO countryDTO=null;
+        try {
+            String datos=getDataUrl(url);
+            Gson gson=new Gson();
+            CountryDAO[] countryDAO=gson.fromJson(datos,CountryDAO[].class);
+            countryDTO=CountryDTO.from(countryDAO[0]);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return countryDTO;
+    }
 
     private String getDataUrl(String url) throws IOException {
         URL obj = new URL(url);
@@ -95,7 +109,6 @@ public CountryDTO getCountryByName(String name) {
         }
         // Cerramos el BufferedReader
         in.close();
-        //devolvemos la respuesta
         return response.toString();
     }
 }

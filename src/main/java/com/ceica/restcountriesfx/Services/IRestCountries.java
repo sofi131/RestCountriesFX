@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IRestCountries {
     public String[] getRegions();
-    //data transfer object
     public List<CountryDTO> getCountriesByRegion(String region);
     public CountryDTO getCountryByName(String name);
+    public CountryDTO getCountryByCca3(String cca3);
 }

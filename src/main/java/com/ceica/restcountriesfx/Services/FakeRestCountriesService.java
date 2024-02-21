@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FakeRestCountriesService implements IRestCountries {
-
     @Override
     public String[] getRegions() {
-       return new  String[] {"Europe","Asia","America","Africa","Oceania","Antartida"};
-
+        return new String[]{"Europe", "Asia","America","Africa","Oceania","Antartida"};
     }
 
     @Override
@@ -35,5 +33,10 @@ public class FakeRestCountriesService implements IRestCountries {
         countryDTO.setPopulation(38000000);
         countryDTO.setFlag("https://flagcdn.com/w320/es.png");
         return countryDTO;
+    }
+
+    @Override
+    public CountryDTO getCountryByCca3(String fifa) {
+        return null;
     }
 }
