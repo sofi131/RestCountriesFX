@@ -59,6 +59,17 @@ public class RestCountriesController {
             Image imgen=new Image(countryDTO.getFlag());
             imgFlag.setImage(imgen);
         });
+        //para navegar en la tabla
+        tblCountries.setOnKeyPressed(e ->{
+            String countrycca3=tblCountries.getSelectionModel().getSelectedItem().getCca3();
+            CountryDTO countryDTO=fakeRestCountriesService.getCountryByCca3(countrycca3);
+            txtCountryName.setText(countryDTO.getName());
+            txtCountryCapital.setText(countryDTO.getCapital());
+            txtCountryCoin.setText(countryDTO.getCoin());
+            txtCountryPopulation.setText(String.valueOf(countryDTO.getPopulation()));
+            Image imgen=new Image(countryDTO.getFlag());
+            imgFlag.setImage(imgen);
+        });
         countryNameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
     }
 
