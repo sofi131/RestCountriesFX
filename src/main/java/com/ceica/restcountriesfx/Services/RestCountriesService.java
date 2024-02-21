@@ -16,25 +16,25 @@ import java.util.List;
 public class RestCountriesService implements IRestCountries {
     @Override
     public String[] getRegions() {
-        List<String> regions = new ArrayList<>();
+        List<String> regions=new ArrayList<>();
         String url = "https://restcountries.com/v3.1/all";
-        List<CountryDTO> countryDTOList=new ArrayList<>();
         try {
-            String datos = getDataUrl(url);
-            Gson gson = new Gson();
+            String datos=getDataUrl(url);
+            Gson gson=new Gson();
             //String a obj json
-            CountryDAO[] objects = gson.fromJson(datos, CountryDAO[].class);
-
+            CountryDAO[] objects= gson.fromJson(datos,CountryDAO[].class);
             // System.out.println("");
-            for (CountryDAO countryDAO : objects) {
-                countryDTOList.add(CountryDTO.from(countryDAO));
+            for (CountryDAO countryDAO:objects){
+                if(! regions.contains(countryDAO.region)){
+                    regions.add(countryDAO.region);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String[] regionArray= new String[regions.size()];
+        String[] regionArray=new String[regions.size()];
         for (int i = 0; i < regions.size(); i++) {
-            regionArray[i]= regions.get(i);
+            regionArray[i]=regions.get(i);
         }
         // return (String[]) regions.toArray();
         return regionArray;
@@ -42,16 +42,22 @@ public class RestCountriesService implements IRestCountries {
 
     @Override
     public List<CountryDTO> getCountriesByRegion(String region) {
-        String url="https://restcountries.com/v3.1/region"+region;
+        String url="https://restcountries.com/v3.1/region/"+region;
+        List<CountryDTO> countryDTOList=new ArrayList<>();
         try {
             String datos=getDataUrl(url);
-            Gson gson = new Gson();
+            Gson gson=new Gson();
             //String a obj json
-            List<CountryDAO> objects = gson.fromJson(datos,new TypeToken<List<CountryDAO>>(){}.getType());
+            List<CountryDAO> objects= gson.fromJson(datos,new TypeToken<List<CountryDAO>>(){}.getType());
+
+            for (CountryDAO countryDAO:objects){
+                countryDTOList.add(CountryDTO.from(countryDAO));
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return countryDTOList;
     }
 
     @Override

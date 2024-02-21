@@ -8,7 +8,7 @@ public class CountryDAO {
     public String region;
     public int population;
     public Flag flags;
-    public Map<String,Currency> currencies;
+    public Map<String, Currency> currencies;
 
 }
 

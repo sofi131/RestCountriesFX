@@ -15,9 +15,17 @@ public class CountryDTO {
         countryDTO.setName(countryDAO.name.common);
         countryDTO.setFlag(countryDAO.flags.png);
         countryDTO.setPopulation(countryDAO.population);
-        countryDTO.setCapital(countryDAO.capital[0]);
-        String keyCurrency= (String) countryDAO.currencies.keySet().toArray()[0];
-        countryDTO.setCoin(countryDAO.currencies.get(keyCurrency).name);
+        String capital="";
+        if (countryDAO.capital!=null)
+            if (countryDAO.capital.length>0)
+                capital=countryDAO.capital[0];
+        countryDTO.setCapital(capital);
+        String coin="";
+        if (countryDAO.currencies!=null){
+            String keyCurrency= (String) countryDAO.currencies.keySet().toArray()[0];
+            coin=countryDAO.currencies.get(keyCurrency).name;
+        }
+        countryDTO.setCoin(coin);
         return countryDTO;
     }
 //--------------------------------------GETTER Y SETTER--------------------------------
