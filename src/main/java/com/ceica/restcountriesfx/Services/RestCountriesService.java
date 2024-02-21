@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestCountriesService implements IRestCountries {
+    //las diferentes regiones (europa...)
     @Override
     public String[] getRegions() {
         List<String> regions=new ArrayList<>();
@@ -39,7 +40,7 @@ public class RestCountriesService implements IRestCountries {
         // return (String[]) regions.toArray();
         return regionArray;
     }
-
+//Lista de los países
     @Override
     public List<CountryDTO> getCountriesByRegion(String region) {
         String url="https://restcountries.com/v3.1/region/"+region;
@@ -59,10 +60,20 @@ public class RestCountriesService implements IRestCountries {
         }
         return countryDTOList;
     }
-
+//para conseguir los datos del país
     @Override
     public CountryDTO getCountryByName(String name) {
-        return null;
+        String url="https://restcountries.com/v3.1/name/"+name;
+        CountryDTO countryDTO=null;
+        try {
+            String datos=getDataUrl(url);
+            Gson gson=new Gson();
+            CountryDAO[] countryDAO=gson.fromJson(datos,CountryDAO[].class);
+            countryDTO=CountryDTO.from(countryDAO[0]);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return countryDTO;
     }
 
     private String getDataUrl(String url) throws IOException {

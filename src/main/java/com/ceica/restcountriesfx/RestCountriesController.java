@@ -52,20 +52,16 @@ public class RestCountriesController {
         });
         //para que clique en la tabla y salgan cosas.
         tblCountries.setOnMouseClicked(e->{
-            //nombre del país que se ha clicado
             String countryName=tblCountries.getSelectionModel().getSelectedItem().getName();
-            //objeto country con toda la información (bandera y demás)
             CountryDTO countryDTO=fakeRestCountriesService.getCountryByName(countryName);
             txtCountryName.setText(countryDTO.getName());
             txtCountryCapital.setText(countryDTO.getCapital());
             txtCountryCoin.setText(countryDTO.getCoin());
             txtCountryPopulation.setText(String.valueOf(countryDTO.getPopulation()));
-            Image image=new Image(countryDTO.getFlag());
-            imgFlag.setImage(image);
-
+            Image imgen=new Image(countryDTO.getFlag());
+            imgFlag.setImage(imgen);
         });
         countryNameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
-
     }
 
     @FXML
