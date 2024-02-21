@@ -41,7 +41,6 @@ public class RestCountriesController {
         RestCountriesService fakeRestCountriesService = new RestCountriesService();
 
         comboRegion.getItems().addAll(fakeRestCountriesService.getRegions());
-        //para que clique la region correspondiente
         comboRegion.setOnAction(e -> {
             if (comboRegion.getSelectionModel().getSelectedItem() != null) {
                 String region = comboRegion.getSelectionModel().getSelectedItem().toString();
@@ -50,7 +49,6 @@ public class RestCountriesController {
                 tblCountries.setItems(observableList);
             }
         });
-        //para que clique en la tabla y salgan cosas.
         tblCountries.setOnMouseClicked(e->{
             String countryName=tblCountries.getSelectionModel().getSelectedItem().getName();
             CountryDTO countryDTO=fakeRestCountriesService.getCountryByName(countryName);
@@ -69,11 +67,10 @@ public class RestCountriesController {
         observableList.clear();
         tblCountries.refresh();
         comboRegion.getSelectionModel().clearSelection();
-        // Limpiar los TextField correspondientes
         txtCountryName.setText("");
-        txtCountryCapital.setText("");
         txtCountryCoin.setText("");
         txtCountryPopulation.setText("");
+        txtCountryCapital.setText("");
         imgFlag.setImage(null);
     }
 }
