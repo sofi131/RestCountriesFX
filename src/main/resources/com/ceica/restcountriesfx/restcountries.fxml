@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -17,10 +18,14 @@
         </columns>
       </TableView>
       <ImageView fx:id="imgFlag" fitHeight="186.0" fitWidth="294.0" layoutX="276.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="txtCountryName" layoutX="276.0" layoutY="310.0" />
-      <TextField fx:id="txtCountryPopulation" layoutX="276.0" layoutY="349.0" />
-      <TextField fx:id="txtCountryCapital" layoutX="438.0" layoutY="310.0" />
-      <TextField fx:id="txtCountryCoin" layoutX="438.0" layoutY="349.0" />
+      <TextField fx:id="txtCountryName" layoutX="276.0" layoutY="335.0" />
+      <TextField fx:id="txtCountryPopulation" layoutX="276.0" layoutY="399.0" />
+      <TextField fx:id="txtCountryCapital" layoutX="438.0" layoutY="335.0" />
+      <TextField fx:id="txtCountryCoin" layoutX="438.0" layoutY="399.0" />
       <Button layoutX="427.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnClear" prefHeight="25.0" prefWidth="143.0" text="Clear" />
+      <Label layoutX="276.0" layoutY="303.0" text="Country" />
+      <Label layoutX="438.0" layoutY="303.0" text="Capital" />
+      <Label layoutX="276.0" layoutY="370.0" text="Population" />
+      <Label layoutX="438.0" layoutY="370.0" text="Coin" />
    </children>
 </AnchorPane>
